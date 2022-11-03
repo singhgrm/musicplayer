@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="main_div">
+
+<div class="music_container">
+    <h2 id="title">MUSIC</h2>
+    <h3 id="artist">arjit singh</h3>
+    <div class="img_container">
+        <img src="images/arj1.jpg" alt =""/>
+    </div>
+        <audio src="music/a1.mp3"></audio>
+    <!--controls-->
+    <div class="music_conrols">
+      <i class="fas fa-backward" id="prev" title="Previous"></i>
+      <i class="fas fa-play main_button" id="play" title="Play"></i>
+      <i class="fas fa-forward" id="next" title="Next"></i>
+    </div>
+</div>
+  </div>
+<script>
+const music=document.querySelector("audio");
+const img=document.querySelector("img");
+const play=document.getElementById('play');
+const artist=document.getElementById("artist");
+const title=document.getElementById("title");
+const prev=document.getElementById("prev"); 
+const next=document.getElementById("next"); 
+//for each song..
+const songs=[
+  {
+  name:"arj1",
+  gana:"a1",
+  title:'Yaro mujhe',
+  artist:'arjit singh',
+  },
+  {
+  name:"arj2",
+  gana:"n2.mp3",
+  title:'Pyar ki pehli',
+  artist:'arjit singh',
+  },
+  {
+  name:"arj3",
+  gana:"n3.mp3",
+  title:'Kuch Kuch Hota Hai',
+  artist:'Udit Narayan',
+  },
+  {
+  name:"arj4",
+  gana:"n5.mp3",
+  title:'Ijazat',
+  artist:'Arijit Singh',
+  },
+  {
+  name:"arj5",
+  gana:"n8.mp3",
+  title:'Tum Hi Ho',
+  artist:'Arijit Singh',
+  },
+  {
+  name:"arj6",
+  gana:"a6",
+  title:'Raaz Ankhen Teri',
+  artist:'Arijit Singh',
+  },
+];
+let isPlaying=false;
+//for play function..
+const playMusic=()=>{
+music.play();
+isPlaying=true;
+play.classList.replace("fa-play","fa-pause");
+imd.classList.add(anime);
+};
+
+//for pause function..
+const pauseMusic=()=>{
+music.pause();
+isPlaying=false;
+play.classList.replace("fa-pause","fa-play");
+imd.classList.add(anime);
+};
+
+play.addEventListener('click',()=>{
+  if(isPlaying)
+  {
+    //agr gana play h to pause kro..
+    pauseMusic();
+  }
+  else{
+    //agr pause h to play kro
+    playMusic();
+  }
+});
+//changing the music with its image and song..
+const loadSong=(songs)=>
+{
+title.textContent=songs.title;
+artist.textContent=songs.artist;
+music.src="music/"+songs.gana+".mpeg";
+img.src="images/"+songs.name+".jpg";
+}
+let idx=0;
+let n=songs.length;
+const nextSong=()=>
+{
+  idx=(idx+1)%n;
+  loadSong(songs[idx]);
+};
+const prevSong=()=>
+{
+  idx=idx-1;
+  if(idx==-1)
+  {
+    idx=n-1;
+  }
+  loadSong(songs[idx]);
+};
+
+next.addEventListener("click",nextSong);
+prev.addEventListener("click",prevSong);
+</script> 
+</body>
+</html>
